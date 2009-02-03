@@ -1,0 +1,2 @@
+## See ERXModelGroup - it tries to preload this eomodel first
+er.extensions.ERXModelGroup.prototypeModelName=wkprototypes

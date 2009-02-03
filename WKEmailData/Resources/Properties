@@ -1,0 +1,24 @@
+#########################################################################
+# WKEmailData configuration
+#########################################################################
+
+## Tells mailer applications whether to send test emails upon application launch
+wk.emailer.TestSendingMail=true
+wk.emailer.testemailaddress=admin@domain.com
+
+## Dictates the frequency in seconds for checking for mail to be sent
+wk.emailer.BatchMailerDaemonFrequency=5
+
+## Database configuration
+EmailData.URL = jdbc:mysql://localhost/emaildata?capitalizeTypenames=true&useUnicode=true&characterEncoding=UTF-8
+EmailData.DBUser =
+EmailData.DBPassword =
+EmailData.DBDriver =
+EmailData.DBPlugin =
+EmailData.DBJDBCInfo =
+
+## Name of the EOModel file without .eomodeld extension containing the prototypes entity to use. Case insensitive.
+# er.extensions.ERXModelGroup.prototypeModelName=WKPrototypes
+
+## Define if child threads inherit the variables of the parent or not
+er.extensions.ERXThreadStorage.useInheritableThreadLocal = true

@@ -1,0 +1,1 @@
+ -destination Sources -java -javaTemplate _Entity.java -model Resources/EmailData.eomodeld -packagedirs -refmodel ../WKPrototypes/Resources/WKPrototypes.eomodeld -subclassDestination Sources -subclassJavaTemplate Entity.java -templatedir Support/EOTemplates -verbose -define-EOGenericRecord er.extensions.eof.ERXGenericRecord

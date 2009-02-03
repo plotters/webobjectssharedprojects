@@ -1,0 +1,665 @@
+{
+    attributes = (
+        {
+            adaptorValueConversionMethodName = toEncodedString; 
+            allowsNull = Y; 
+            columnName = ""; 
+            externalType = VARCHAR; 
+            factoryMethodArgumentType = EOFactoryMethodArgumentIsNSString; 
+            name = blowfishString; 
+            valueClassName = "wk.prototypes.EncodedString"; 
+            valueFactoryMethodName = "createInstanceFromEncodedString:"; 
+            valueType = S; 
+            width = 255; 
+        }, 
+        {
+            adaptorValueConversionMethodName = toString; 
+            allowsNull = Y; 
+            columnName = ""; 
+            externalType = CHAR; 
+            factoryMethodArgumentType = EOFactoryMethodArgumentIsNSString; 
+            name = boolean; 
+            valueClassName = "java.lang.Boolean"; 
+            valueFactoryMethodName = "valueOf:"; 
+            valueType = c; 
+            width = 5; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = datafile; 
+            externalType = MEDIUMBLOB; 
+            name = data16Megabyte; 
+            valueClassName = NSData; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = datafile; 
+            externalType = LONGBLOB; 
+            name = data4Gigabyte; 
+            valueClassName = NSData; 
+        }, 
+        {
+            columnName = eodate; 
+            externalType = DATE; 
+            name = date; 
+            userInfo = {modificationDate = "2002-06-04 14:00:54 +0200"; }; 
+            valueClassName = NSCalendarDate; 
+        }, 
+        {
+            columnName = eodatetime; 
+            externalType = DATETIME; 
+            name = dateTime; 
+            userInfo = {modificationDate = "2002-06-04 14:00:54 +0200"; }; 
+            valueClassName = NSCalendarDate; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = emailaddress; 
+            externalType = VARCHAR; 
+            name = emailAddress; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 50; 
+        }, 
+        {
+            adaptorValueConversionMethodName = toBlob; 
+            allowsNull = Y; 
+            columnName = ""; 
+            externalType = BLOB; 
+            name = mutableArray; 
+            valueClassName = "er.extensions.ERXMutableArray"; 
+            valueFactoryMethodName = fromBlob; 
+        }, 
+        {
+            adaptorValueConversionMethodName = toBlob; 
+            allowsNull = Y; 
+            columnName = ""; 
+            externalType = BLOB; 
+            name = mutableDictionary; 
+            valueClassName = "er.extensions.ERXMutableDictionary"; 
+            valueFactoryMethodName = "fromBlob:"; 
+        }, 
+        {
+            adaptorValueConversionMethodName = toString; 
+            allowsNull = Y; 
+            columnName = ""; 
+            externalType = BLOB; 
+            factoryMethodArgumentType = EOFactoryMethodArgumentIsNSString; 
+            name = nsdictionaryStrings; 
+            valueClassName = "wk.foundation.WKDictionary"; 
+            valueFactoryMethodName = "fromString:"; 
+            width = 1000; 
+        }, 
+        {
+            columnName = eonumboolean; 
+            externalType = TINYINT; 
+            name = numBoolean; 
+            valueClassName = NSNumber; 
+            valueType = c; 
+            width = 1; 
+        }, 
+        {
+            columnName = eonumbyte127; 
+            externalType = TINYINT; 
+            name = numByte127; 
+            valueClassName = NSNumber; 
+            valueType = b; 
+            width = 4; 
+        }, 
+        {
+            columnName = ""; 
+            externalType = DOUBLE; 
+            name = numDouble; 
+            precision = 11; 
+            scale = 6; 
+            userInfo = {modificationDate = "2002-06-04 14:00:54 +0200"; }; 
+            valueClassName = NSNumber; 
+            valueType = d; 
+        }, 
+        {
+            columnName = ""; 
+            externalType = INT; 
+            name = numInt9Dgt2Billion; 
+            userInfo = {modificationDate = "2002-06-04 14:00:54 +0200"; }; 
+            valueClassName = NSNumber; 
+            valueType = i; 
+            width = 11; 
+        }, 
+        {
+            columnName = ""; 
+            externalType = BIGINT; 
+            name = numIntBig18DgtQuintillion; 
+            valueClassName = NSNumber; 
+            valueType = l; 
+            width = 20; 
+        }, 
+        {
+            columnName = ""; 
+            externalType = DECIMAL; 
+            name = numMoney; 
+            precision = 18; 
+            scale = 7; 
+            valueClassName = NSDecimalNumber; 
+            valueType = B; 
+        }, 
+        {
+            columnName = eonumshort; 
+            externalType = SMALLINT; 
+            name = numShort32000; 
+            valueClassName = NSNumber; 
+            valueType = s; 
+        }, 
+        {
+            columnName = oid; 
+            externalType = INT; 
+            name = oid; 
+            serverTimeZone = "Europe/Berlin"; 
+            userInfo = {modificationDate = "2002-06-04 14:00:54 +0200"; }; 
+            valueClassName = NSNumber; 
+            valueType = i; 
+            width = 11; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = phone; 
+            externalType = CHAR; 
+            name = phone; 
+            serverTimeZone = "US/Eastern"; 
+            valueClassName = NSString; 
+            valueType = c; 
+            width = 14; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = eostr001; 
+            externalType = CHAR; 
+            name = str001; 
+            userInfo = {modificationDate = "2002-06-04 14:00:54 +0200"; }; 
+            valueClassName = NSString; 
+            valueType = c; 
+            width = 1; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = eostr010; 
+            externalType = CHAR; 
+            name = str010; 
+            userInfo = {modificationDate = "2002-06-04 14:00:54 +0200"; }; 
+            valueClassName = NSString; 
+            valueType = c; 
+            width = 10; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = eostr016; 
+            externalType = VARCHAR; 
+            name = str016; 
+            userInfo = {modificationDate = "2002-06-04 14:00:54 +0200"; }; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 16; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = eostr050; 
+            externalType = VARCHAR; 
+            name = str050; 
+            userInfo = {modificationDate = "2002-06-04 14:00:54 +0200"; }; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 50; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = eostr100; 
+            externalType = VARCHAR; 
+            name = str100; 
+            userInfo = {modificationDate = "2002-06-04 14:00:54 +0200"; }; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 100; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = eostr255; 
+            externalType = VARCHAR; 
+            name = str255; 
+            userInfo = {modificationDate = "2002-06-04 14:00:54 +0200"; }; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 255; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = eostrostype; 
+            externalType = CHAR; 
+            name = strOSType; 
+            userInfo = {modificationDate = "2002-06-04 14:00:54 +0200"; }; 
+            valueClassName = NSString; 
+            valueType = c; 
+            width = 4; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = eostring16mb; 
+            externalType = MEDIUMBLOB; 
+            name = string16Mb; 
+            userInfo = {modificationDate = "2002-06-04 14:00:54 +0200"; }; 
+            valueClassName = NSString; 
+            valueType = C; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = eostring65000; 
+            externalType = BLOB; 
+            name = string65000; 
+            userInfo = {modificationDate = "2002-06-04 14:00:54 +0200"; }; 
+            valueClassName = NSString; 
+            valueType = C; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = text65000; 
+            externalType = TEXT; 
+            name = text65000; 
+            valueClassName = NSString; 
+            valueType = C; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = ccnumber; 
+            externalType = VARCHAR; 
+            name = xCreditCard; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 20; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = mimetype; 
+            externalType = VARCHAR; 
+            name = xMimeType; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 255; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = title; 
+            externalType = CHAR; 
+            name = xPersonTitle; 
+            valueClassName = NSString; 
+            valueType = c; 
+            width = 5; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = eoxaddress; 
+            externalType = VARCHAR; 
+            name = xaddress; 
+            serverTimeZone = "US/Eastern"; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 100; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = eoxbusiness; 
+            externalType = VARCHAR; 
+            name = xbusiness; 
+            serverTimeZone = "US/Eastern"; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 100; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = eoxcassdate; 
+            externalType = INT; 
+            name = xcassDate; 
+            valueClassName = NSNumber; 
+            valueType = i; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = eoxcity; 
+            externalType = VARCHAR; 
+            name = xcity; 
+            serverTimeZone = "US/Eastern"; 
+            userInfo = {modificationDate = "2002-06-04 14:00:54 +0200"; }; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 50; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = eoxerrorcode; 
+            externalType = INT; 
+            name = xerrorCode; 
+            valueClassName = NSNumber; 
+            valueType = i; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = eoxfirstname; 
+            externalType = VARCHAR; 
+            name = xfirstName; 
+            serverTimeZone = "US/Eastern"; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 127; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = eoxfullname; 
+            externalType = VARCHAR; 
+            name = xfullName; 
+            serverTimeZone = "US/Eastern"; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 127; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = eoxlastname; 
+            externalType = VARCHAR; 
+            name = xlastName; 
+            serverTimeZone = "US/Eastern"; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 127; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = eoxstate; 
+            externalType = CHAR; 
+            name = xstate; 
+            serverTimeZone = "US/Eastern"; 
+            userInfo = {modificationDate = "2002-06-04 14:00:54 +0200"; }; 
+            valueClassName = NSString; 
+            valueType = c; 
+            width = 2; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = eoxzip; 
+            externalType = CHAR; 
+            name = xzip; 
+            valueClassName = NSString; 
+            valueType = c; 
+            width = 10; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = dpcdigits; 
+            externalType = CHAR; 
+            name = zDpcDigits; 
+            valueClassName = NSString; 
+            valueType = c; 
+            width = 3; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = ncoaFootnote; 
+            externalType = CHAR; 
+            name = zMoveFootnote; 
+            valueClassName = NSString; 
+            valueType = c; 
+            width = 2; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = recaddtime; 
+            externalType = DATETIME; 
+            name = zRecAddTime; 
+            valueClassName = NSCalendarDate; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = recadduser; 
+            externalType = VARCHAR; 
+            name = zRecAddUser; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 50; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = recmodtime; 
+            externalType = DATETIME; 
+            name = zRecModTime; 
+            valueClassName = NSCalendarDate; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = recmoduser; 
+            externalType = VARCHAR; 
+            name = zRecModUser; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 50; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = userid; 
+            externalType = VARCHAR; 
+            name = zUserId; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 50; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = eozcarrt; 
+            externalType = CHAR; 
+            name = zcarRt; 
+            serverTimeZone = "US/Eastern"; 
+            userInfo = {modificationDate = "2002-06-04 14:00:54 +0200"; }; 
+            valueClassName = NSString; 
+            valueType = c; 
+            width = 4; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = eozdpbarcode; 
+            externalType = VARCHAR; 
+            name = zdpBarcode; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 14; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = eozendorsementline; 
+            externalType = VARCHAR; 
+            name = zendorsementLine; 
+            serverTimeZone = "US/Eastern"; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 50; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = eozlotnum; 
+            externalType = CHAR; 
+            name = zlotNum; 
+            valueClassName = NSString; 
+            valueType = c; 
+            width = 5; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = eozmatchtype; 
+            externalType = CHAR; 
+            name = zmatchType; 
+            valueClassName = NSString; 
+            valueType = c; 
+            width = 1; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = eozmoveeffective; 
+            externalType = DATE; 
+            name = zmoveEffective; 
+            serverTimeZone = "US/Eastern"; 
+            valueClassName = NSCalendarDate; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = eozmovetype; 
+            externalType = CHAR; 
+            name = zmoveType; 
+            valueClassName = NSString; 
+            width = 1; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = eozpackagenumber; 
+            externalType = INT; 
+            name = zpackageNumber; 
+            valueClassName = NSNumber; 
+            valueType = i; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = eozpresortid; 
+            externalType = INT; 
+            name = zpresortID; 
+            valueClassName = NSNumber; 
+            valueType = i; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = eoztraynumber; 
+            externalType = INT; 
+            name = ztrayNumber; 
+            valueClassName = NSNumber; 
+            valueType = i; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = eozwalksequence; 
+            externalType = CHAR; 
+            name = zwalkSequence; 
+            valueClassName = NSString; 
+            valueType = c; 
+            width = 10; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = eozzip4; 
+            externalType = INT; 
+            name = zzip4; 
+            valueClassName = NSNumber; 
+            valueType = i; 
+            width = 4; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = eozzip5; 
+            externalType = INT; 
+            name = zzip5; 
+            valueClassName = NSNumber; 
+            valueType = i; 
+            width = 5; 
+        }
+    ); 
+    attributesUsedForLocking = (
+        boolean, 
+        emailAddress, 
+        numBoolean, 
+        numByte127, 
+        numInt9Dgt2Billion, 
+        numIntBig18DgtQuintillion, 
+        numShort32000, 
+        oid, 
+        phone, 
+        str001, 
+        str010, 
+        str016, 
+        str050, 
+        strOSType, 
+        xCreditCard, 
+        xMimeType, 
+        xPersonTitle, 
+        xaddress, 
+        xbusiness, 
+        xcity, 
+        xfirstName, 
+        xfullName, 
+        xlastName, 
+        xstate, 
+        xzip, 
+        zUserId, 
+        zzip4, 
+        zzip5
+    ); 
+    classProperties = (
+        blowfishString, 
+        boolean, 
+        data16Megabyte, 
+        data4Gigabyte, 
+        date, 
+        dateTime, 
+        emailAddress, 
+        mutableArray, 
+        mutableDictionary, 
+        nsdictionaryStrings, 
+        numBoolean, 
+        numByte127, 
+        numDouble, 
+        numInt9Dgt2Billion, 
+        numIntBig18DgtQuintillion, 
+        numMoney, 
+        numShort32000, 
+        phone, 
+        str001, 
+        str010, 
+        str016, 
+        str050, 
+        str100, 
+        str255, 
+        strOSType, 
+        string16Mb, 
+        string65000, 
+        text65000, 
+        xCreditCard, 
+        xMimeType, 
+        xPersonTitle, 
+        xaddress, 
+        xbusiness, 
+        xcassDate, 
+        xcity, 
+        xerrorCode, 
+        xfirstName, 
+        xfullName, 
+        xlastName, 
+        xstate, 
+        xzip, 
+        zDpcDigits, 
+        zMoveFootnote, 
+        zRecAddTime, 
+        zRecAddUser, 
+        zRecModTime, 
+        zRecModUser, 
+        zUserId, 
+        zcarRt, 
+        zdpBarcode, 
+        zendorsementLine, 
+        zlotNum, 
+        zmatchType, 
+        zmoveEffective, 
+        zmoveType, 
+        zpackageNumber, 
+        zpresortID, 
+        ztrayNumber, 
+        zwalkSequence, 
+        zzip4, 
+        zzip5
+    ); 
+    fetchSpecificationDictionary = {}; 
+    isAbstractEntity = Y; 
+    name = EOPrototypes; 
+    primaryKeyAttributes = (oid); 
+    userInfo = {modificationDate = "2002-06-24 17:39:36 +0200"; }; 
+}

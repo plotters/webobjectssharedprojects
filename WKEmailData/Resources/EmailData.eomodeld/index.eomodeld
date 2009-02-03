@@ -1,0 +1,29 @@
+{
+    EOModelVersion = "2.1"; 
+    adaptorName = JDBC; 
+    connectionDictionary = {
+        URL = "jdbc:mysql://localhost/emaildata?capitalizeTypenames=true&useUnicode=true&characterEncoding=UTF-8"; 
+        password = ""; 
+        username = ""; 
+    }; 
+    entities = (
+        {className = "wk.emaildata.EDEmail"; name = EDEmail; }, 
+        {className = "wk.emaildata.EDTextBlob"; name = EDTextBlob; }
+    ); 
+    userInfo = {
+        "_EntityModeler" = {
+            activeDatabaseConfigName = Default; 
+            databaseConfigs = {
+                Default = {
+                    adaptorName = JDBC; 
+                    connectionDictionary = {
+                        URL = "jdbc:mysql://localhost/emaildata?capitalizeTypenames=true&useUnicode=true&characterEncoding=UTF-8"; 
+                        password = ""; 
+                        username = ""; 
+                    }; 
+                    prototypeEntityName = EOPrototypes; 
+                }; 
+            }; 
+        }; 
+    }; 
+}

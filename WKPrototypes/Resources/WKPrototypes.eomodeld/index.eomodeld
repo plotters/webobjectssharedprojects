@@ -1,0 +1,29 @@
+{
+    EOModelVersion = "2.1"; 
+    adaptorName = JDBC; 
+    connectionDictionary = {
+        URL = "jdbc:mysql://127.0.0.1/MYDATABASE"; 
+        driver = ""; 
+        password = ""; 
+        plugin = ""; 
+        username = ""; 
+    }; 
+    entities = ({className = EOGenericRecord; name = EOPrototypes; }); 
+    userInfo = {
+        "_EntityModeler" = {
+            activeDatabaseConfigName = Default; 
+            databaseConfigs = {
+                Default = {
+                    adaptorName = JDBC; 
+                    connectionDictionary = {
+                        URL = "jdbc:mysql://127.0.0.1/MYDATABASE"; 
+                        driver = ""; 
+                        password = ""; 
+                        plugin = ""; 
+                        username = ""; 
+                    }; 
+                }; 
+            }; 
+        }; 
+    }; 
+}

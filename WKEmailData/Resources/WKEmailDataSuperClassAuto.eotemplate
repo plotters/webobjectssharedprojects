@@ -1,0 +1,315 @@
+<$comment
+EO Template for use by "eogenerator" based upon MiscMerge engine.
+You may customize this file to modify the templates generated
+by this tool.  See the MiscMerge documentation for a description
+of the parsing language.  The engine gets passed this file and an
+EOEntity to process, so the methods used must be ones that an
+EOEntity can respond to.
+
+BE SURE NOT TO INCLUDE DATES IN THIS FILE.  Since the "eogenerator"
+tool tries to compare the newly generated file with the old file,
+adding dates to this file will guarantee the old file gets
+overridden by the new file, forcing a recompilation of your EO.$>
+// <$GEN_PREFIX$><$classNameWithoutPackage$>.java
+//
+// Copyright (c) 2004 - 2006 Kieran Kelleher & Warren Cohn. All rights reserved.
+// Written by Kieran Kelleher
+// 
+// <Kieran: Created from (eogenerator/MyTemplates/EOGJavaSourceKK032806.eotemplate) >.
+// Created by eogenerator
+// DO NOT EDIT.  Make changes to <$classNameWithoutPackage$>.java instead.
+
+<$foreach package classPackage do$>package <$package$>;
+<$endforeach do$>
+
+import com.webobjects.eoaccess.*;
+import com.webobjects.eocontrol.*;
+import com.webobjects.foundation.*;
+import java.util.Enumeration;
+import java.math.BigDecimal;
+import org.apache.log4j.Logger;
+import er.extensions.ERXGenericRecord;
+
+<$comment This is how to put in a custom EO superclass.  We also declare
+this class as being abstract, since it should never be instantiated.
+$>
+
+public abstract class <$GEN_PREFIX$><$classNameWithoutPackage$> extends <$if hasParentEntity$><$javaParentClassName$><$else$>ERXGenericRecord<$endif$> {
+    private static Logger log = Logger.getLogger( <$GEN_PREFIX$><$classNameWithoutPackage$>.class );
+
+<$comment
+
+Some people like to have constant strings defined for each key. For an
+attribute named fooBar, this will declare a FOO_BAR_KEY constant string,
+which can be used in calls to valueForKey(), addObjectToBothSides..., etc.
+A constant of ENTITY_NAME can be used for fetch specs and other methods.
+This lets the compiler flag usages of these keys when the names change.
+Additionally, it can be handy to have constants defined for the name 
+of the database table, the names of all the attribute column names, and fetch
+specifications.
+
+$>
+    public static final String ENTITY_NAME = "<$name$>";
+<$if externalName$>
+    public static final String ENTITY_TABLE_NAME = "<$externalName$>";<$endif$>
+<$foreach attribute attributes.@sortedNameArray do$>
+    public static final String KEY_<$attribute.name.uppercaseUnderbarString$> = "<$attribute.name$>";<$endforeach$>
+<$foreach attribute attributes.@sortedNameArray do$><$if attribute.columnName$>
+    public static final String COLKEY_<$attribute.name.uppercaseUnderbarString$> = "<$attribute.columnName$>";<$endif$><$endforeach$>
+<$foreach rel classToOneRelationships.@sortedNameArray do$>
+    public static final String KEY_<$rel.name.uppercaseUnderbarString$> = "<$rel.name$>";<$endforeach$>
+<$foreach rel classToManyRelationships.@sortedNameArray do$>
+    public static final String KEY_<$rel.name.uppercaseUnderbarString$> = "<$rel.name$>";<$endforeach$>
+<$foreach spec javaBeautifiedFetchSpecificationDictionaries.@sortedNameArray do$>
+    public static final String SPEC_<$spec.fetchName.uppercaseUnderbarString$> = "<$spec.fetchName$>";<$endforeach$>
+
+
+    public <$GEN_PREFIX$><$classNameWithoutPackage$>() {
+        super();
+    }
+
+<$comment
+Add methods to call named fetch specifications, with any qualifier bindings having typed
+parameters.
+
+$>
+<$foreach FetchSpec javaBeautifiedFetchSpecificationDictionaries.@sortedNameArray do$>
+    public static NSArray objectsFor<$FetchSpec.niceName$>(EOEditingContext context<$foreach Binding FetchSpec.bindings do2$>, <$Binding.codeType$><$Binding.name$>Binding<$endforeach do2$>) {
+        EOFetchSpecification spec = EOFetchSpecification.fetchSpecificationNamed("<$FetchSpec.fetchName$>", "<$name$>");
+<$if FetchSpec.bindings.@count > 0$>
+        NSMutableDictionary bindings = new NSMutableDictionary();
+<$foreach Binding FetchSpec.bindings do2$>
+        if (<$Binding.name$>Binding != null)
+            bindings.setObjectForKey(<$Binding.name$>Binding, "<$Binding.name$>");<$endforeach do2$>
+        spec = spec.fetchSpecificationWithQualifierBindings(bindings);
+<$endif$>
+        return context.objectsWithFetchSpecification(spec);
+    }
+<$endforeach do$>
+
+	/** @return a dictionary of changes between the current EO and the last committed version of the EO */
+	public NSDictionary changedProperties() {
+   		NSDictionary commitedValues = editingContext().committedSnapshotForObject(this);
+   		return changesFromSnapshot(commitedValues);
+ 	}
+
+    // The attribute setters and getters
+    // **********************************
+
+<$foreach Attribute classAttributes.@sortedNameArray do$>
+    /** @return <$Attribute.userInfo.javadoc$> */
+    public <$Attribute.javaValueClassName$> <$Attribute.name$>() {
+        return (<$Attribute.javaValueClassName$>)storedValueForKey("<$Attribute.name$>");
+    }
+    /** Set <$Attribute.userInfo.javadoc$> */
+    public void set<$Attribute.name.initialCapitalString$>(<$Attribute.javaValueClassName$> aValue) {
+        if( log.isDebugEnabled() ) log.debug( "updating <$Attribute.name$> from "+<$Attribute.name$>()+" to "+aValue );
+        takeStoredValueForKey(aValue, "<$Attribute.name$>");
+    }<$comment
+
+ADVANCED EXAMPLE
+
+The following code shows an example of using the userInfo dictionary on an attribute to create
+additional methods.
+
+This example allows the user to define the key 'abbreviate' to create a method that will turn a
+string into a abbreviated version.  This can be really handy in WO components where you may need
+to display a text string that could be very long, but need it to always fit in a certain area.
+Additional methods could be made to make shorter or longer abbreviated strings.  The code checks
+to see if the type of the attribute is a String and if the abbreviated length is at least greater
+than 3 characters, before it will create the method.
+
+<$if Attribute.javaValueClassName eq 'String' and Attribute.userInfo.abbreviate gt 3$>
+    public String abbreviated<$Attribute.name.initialCapitalString$>() {
+        String value = <$Attribute.name$>();
+        if ( value != null && value.length() > <$Attribute.userInfo.abbreviate$> )
+            value = value.substring(0,<$Attribute.userInfo.abbreviate$> - 3) + "...";
+        return value;
+    }
+<$endif$>
+
+This is just one example of data manipulation that eogenerator can do.  You could have methods that
+uppercase values, strip blanks, encrypt the text, etc. all determined by entries in the userInfo
+dictionary.  See below for a To-Many relationship example.
+
+$>
+<$endforeach do$>
+
+
+<$foreach ToOneRelationship classToOneRelationships.@sortedNameArray do$>
+    /** @return <$ToOneRelationship.userInfo.javadoc$> */
+    public <$ToOneRelationship.destinationEntity.referenceJavaClassName$> <$ToOneRelationship.name$>() {
+        return (<$ToOneRelationship.destinationEntity.referenceJavaClassName$>)storedValueForKey("<$ToOneRelationship.name$>");
+    }
+    /** Sets <$ToOneRelationship.userInfo.javadoc$> */
+    public void set<$ToOneRelationship.name.initialCapitalString$>(<$ToOneRelationship.destinationEntity.referenceJavaClassName$> aValue) {
+        if( log.isDebugEnabled() ) log.debug( "updating <$ToOneRelationship.name$> from "+<$ToOneRelationship.name$>()+" to "+aValue );
+        takeStoredValueForKey(aValue, "<$ToOneRelationship.name$>");
+    }<$comment
+
+The following method is better than using addObjectToBothSidesOfRelationshipWithKey directly
+because you will get compile time type checking instead of runtime checking (plus you don't
+risk typos in contstant strings of key names).
+$>
+    /** Sets relationship for <$ToOneRelationship.userInfo.javadoc$> */
+    public void set<$ToOneRelationship.name.initialCapitalString$>Relationship(<$ToOneRelationship.destinationEntity.referenceJavaClassName$> value) {
+        if (value == null) {
+            <$ToOneRelationship.destinationEntity.referenceJavaClassName$> object = <$ToOneRelationship.name$>();
+            if (object != null)
+                removeObjectFromBothSidesOfRelationshipWithKey(object, "<$ToOneRelationship.name$>");
+        }
+        else {
+            addObjectToBothSidesOfRelationshipWithKey(value, "<$ToOneRelationship.name$>");
+        }
+    }
+<$endforeach do$>
+    // The To Many Relationships have the following utility methods for each one:
+    //		A getter
+    //		A addTo (adds one item to the relationship)
+    //		A removeFrom (removes one item)
+    //		A removeAllFrom (removes all items)
+    //		A create (creates a new EO and adds it to the relationship) - I don't like this one so I comment it out of template
+    //		A delete (removes a single EO from the relationship and DELETES the EO)
+    //		A deleteAll (removes and DELETES all EO's in the relationship)
+    // *****************************************************************************
+
+
+<$foreach ToManyRelationship classToManyRelationships.@sortedNameArray tomanyrels$>
+    /** @return <$ToManyRelationship.userInfo.javadoc$> */
+    public NSArray <$ToManyRelationship.name$>() {
+        return (NSArray)storedValueForKey("<$ToManyRelationship.name$>");
+    }
+    /** Sets <$ToManyRelationship.userInfo.javadoc$> */
+    public void set<$ToManyRelationship.name.initialCapitalString$>(NSMutableArray aValue) {
+        takeStoredValueForKey(aValue, "<$ToManyRelationship.name$>");
+    }
+    /** Adds to <$ToManyRelationship.userInfo.javadoc$> */
+    public void addTo<$ToManyRelationship.name.initialCapitalString$>(<$ToManyRelationship.destinationEntity.referenceJavaClassName$> object) {
+        NSMutableArray array = (NSMutableArray)<$ToManyRelationship.name$>();
+        willChange();
+        array.addObject(object);
+    }
+    /** Removes from <$ToManyRelationship.userInfo.javadoc$> */
+    public void removeFrom<$ToManyRelationship.name.initialCapitalString$>(<$ToManyRelationship.destinationEntity.referenceJavaClassName$> object) {
+        NSMutableArray array = (NSMutableArray)<$ToManyRelationship.name$>();
+        willChange();
+        array.removeObject(object);
+    }<$comment
+
+The following adds typed methods to add or remove an object from a to-many relationship.
+This is better than using addObjectToBothSidesOfRelationshipWithKey directly because
+you will get compile time type checking instead of runtime checking, and you avoid the
+possibility of making a typo in the key name.
+$>
+    /** Adds to <$ToManyRelationship.userInfo.javadoc$> */
+    public void addTo<$ToManyRelationship.name.initialCapitalString$>Relationship(<$ToManyRelationship.destinationEntity.referenceJavaClassName$> object) {
+        addObjectToBothSidesOfRelationshipWithKey(object, "<$ToManyRelationship.name$>");
+    }
+    /** Removes from <$ToManyRelationship.userInfo.javadoc$> */
+    public void removeFrom<$ToManyRelationship.name.initialCapitalString$>Relationship(<$ToManyRelationship.destinationEntity.referenceJavaClassName$> object) {
+        removeObjectFromBothSidesOfRelationshipWithKey(object, "<$ToManyRelationship.name$>");
+    }<$comment
+
+The following adds typed methods to create, and delete objects from a to-many relationship.
+The main difference in the delete mechanism, versus the removeFrom... method above is that
+this delete method will remove the object from the editing context if it is we do not own
+its destination.  The user can override these methods in the subclass to provide additional
+functionality on these methods.
+$>
+<$comment
+    public <$ToManyRelationship.destinationEntity.referenceJavaClassName$> create<$ToManyRelationship.name.initialCapitalString$>Relationship() {
+		EOClassDescription eoClassDesc = EOClassDescription.classDescriptionForEntityName("<$ToManyRelationship.destinationEntity.name$>");
+		EOEnterpriseObject eoObject = eoClassDesc.createInstanceWithEditingContext(editingContext(), null);
+		editingContext().insertObject(eoObject);
+		addObjectToBothSidesOfRelationshipWithKey(eoObject, "<$ToManyRelationship.name$>");
+		return (<$ToManyRelationship.destinationEntity.referenceJavaClassName$>)eoObject;
+    }
+$>
+    /** Deletes <$ToManyRelationship.userInfo.javadoc$> */
+    public void delete<$ToManyRelationship.name.initialCapitalString$>Relationship(<$ToManyRelationship.destinationEntity.referenceJavaClassName$> object) {
+        removeObjectFromBothSidesOfRelationshipWithKey(object, "<$ToManyRelationship.name$>");<$
+if !ToManyRelationship.ownsDestination$>
+        editingContext().deleteObject(object);<$endif$>
+    }
+    public void deleteAll<$ToManyRelationship.name.initialCapitalString$>Relationships() {
+	Enumeration objects = <$ToManyRelationship.name$>().immutableClone().objectEnumerator();
+	while ( objects.hasMoreElements() )
+	    delete<$ToManyRelationship.name.initialCapitalString$>Relationship((<$ToManyRelationship.destinationEntity.referenceJavaClassName$>)objects.nextElement());
+    }<$comment
+
+ADVANCED EXAMPLE
+
+The following code is an example of something fancier that can be done than just making creating
+the default accessor methods.
+
+A common task in many EOs is to have methods that will return sorted arrays of the to-many
+relationships.  While it is generally pretty easy to create these methods, it can become tedious
+if you have many relationships that need ordering.  This example provides a way to make generating
+those methods easier.
+
+It works by using the userInfo dictionary on an EORelationship.  You can put key-value pairs in
+that dictionary that can then be accessed by eogenerator to conditionally compile information.
+In the example below, the code looks to see if there is a key named 'sortMethods' defined in
+the userInfo dictionary.  If there is, then it presumes that the value will be an array of 
+dictionaries that define the sort methods. Each dictionary corresponds to one sort method,
+so that you can create multiple methods on a single relationship. This dictionary has one
+optional element, a key named 'by' and one required element, a key named 'ordering'. The 'by'
+key allows you to specify a extension to be tacked onto the method name. Because you can
+create multiple methods for sorting, this is needed to insure you don't have a name conflict.
+Note: The code doesn't check for conflicts, it just allows a way out.  The 'ordering' key takes
+an array of dictionaries itself.  These dictionaries just has one required element, a 'key' element
+and an optional 'sel' element.  The 'key' element should have the name of an attribute to sort
+on, while the 'sel' element is just the name of a EOSortOrdering selector, just the part after
+the 'EOSortOrdering.Compare' portion for simplicity. If no 'sel' value is given, then the code
+just uses Ascending.
+
+So say we have this example userInfo entry for 'sortMethods' on an 'employees' reletionship:
+
+  ({ by = NameAndDOB; ordering = ({key = name; sel = Ascending}, {key = dob; sel = Descending}); },
+   { ordering = ({key = name}) };)
+
+We end up with two methods:
+
+   public NSArray orderedEmployeesByNameAndDOB() // Ordered by ascending name and descending dob
+   public NSArray orderedEmployees()		 // Ordered by ascending name
+
+<$foreach SortMethod ToManyRelationship.userInfo.sortMethods sortmethodloop$><$
+  if SortMethod.ordering.@count gt 0$><$
+    if SortMethod.by ne ''$><$setmerge SortMethodBy = "By<$SortMethod.by$>"$><$endif$>
+
+    // Store the sort ordering in a private variable so that it won't take so long to execute the method
+    // especially useful if the sort method gets called a lot.
+    private static NSArray _orderingsFor<$ToManyRelationship.name.initialCapitalString$><$SortMethodBy$>;
+    
+    public NSArray ordered<$ToManyRelationship.name.initialCapitalString$><$SortMethodBy$>() {
+        NSArray objects = <$ToManyRelationship.name$>();
+        if ( objects.count() > 1 ) {
+            if ( _orderingsFor<$ToManyRelationship.name.initialCapitalString$><$SortMethodBy$> == null )
+                _orderingsFor<$ToManyRelationship.name.initialCapitalString$><$SortMethodBy$> = new NSArray(
+		    new Object[] {<$foreach Ordering SortMethod.ordering orderLoop$><$if OrderingIndex gt 0$>,<$endif$>
+                    	EOSortOrdering.sortOrderingWithKey("<$Ordering.key$>", EOSortOrdering.Compare<$if Ordering.sel$><$Ordering.sel$><$else$>Ascending<$endif$>)<$endforeach orderLoop$>
+                    }
+		);
+
+            objects = EOSortOrdering.sortedArrayUsingKeyOrderArray(objects, _orderingsFor<$ToManyRelationship.name.initialCapitalString$><$SortMethodBy$>);
+        }
+        return objects;
+    }<$
+  endif$><$
+endforeach sortmethodloop$>
+
+This may seem kind of complex and more effort than its worth, but a great many repetitive
+coding tasks can be accomplished by eogenerator in this same way.  You could have userInfo
+entries for attributes to do case conversion, do data conversion from one type to another
+(like T/F to boolean true/false), or create abbreviated strings of very long text. You could
+have to-many entries to setup filtering for some defined value(s) you provide.  You could
+even stick something in EOEntity's userInfo itself to setup some complex validation checking.
+
+We encourage you to explore the possibilities and if you find you've created some addition that is
+really useful, generic enough to be used by others, and you'd like to see included as an
+example here, your more than welcome to donate your ideas.
+
+$>
+<$endforeach tomanyrels$>
+}
+
