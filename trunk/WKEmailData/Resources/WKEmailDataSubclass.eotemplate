@@ -1,0 +1,66 @@
+<$comment
+EO Template for use by "eogenerator" based upon MiscMerge engine.
+You may customize this file to modify the templates generated
+by this tool.  See the MiscMerge documentation for a description
+of the parsing language.  The engine gets passed this file and an
+EOEntity to process, so the methods used must be ones that an
+EOEntity can respond to.
+
+BE SURE NOT TO INCLUDE DATES IN THIS FILE.  Since the "eogenerator"
+tool tries to compare the newly generated file with the old file,
+adding dates to this file will guarantee the old file gets
+overridden by the new file, forcing a recompilation of your EO.$>// <$classNameWithoutPackage$>.java
+//
+// Copyright (c) <$date %Y$> Kieran Kelleher & Warren Cohn. All rights reserved.
+// Written by Kieran Kelleher
+// 
+// <$date %a %b %d %Y$> Kieran: Created (eogenerator/JavaSubclassSourceEOF5.eotemplate).
+<$foreach package classPackage do$>package <$package$>;
+<$endforeach do$>
+import com.webobjects.eoaccess.*;
+import com.webobjects.eocontrol.*;
+import com.webobjects.foundation.*;
+import omega.reusable.*;
+import java.math.BigDecimal;
+import java.util.*;
+import org.apache.log4j.Logger;
+import er.extensions.*;
+
+public class <$classNameWithoutPackage$> extends <$GEN_PREFIX$><$classNameWithoutPackage$> {
+	private static Logger log = Logger.getLogger( <$classNameWithoutPackage$>.class );
+	
+    public <$classNameWithoutPackage$>() {
+        super();
+    }
+<$comment	
+
+	// I generally want to use a factory method 'createInstance'
+	// in the root class of the hierarchy, so I am commenting out these
+	// EOGenerator utility classes in favor of standardized factory methods
+    public <$classNameWithoutPackage$>( EOEditingContext ec ) {
+        super();
+        ec.insertObject( this );
+    }
+    
+    public <$classNameWithoutPackage$> localInstance( EOEditingContext newEC ) {
+        return (<$classNameWithoutPackage$>) EOUtilities.localInstanceOfObject( newEC, this );
+    }
+
+$>
+/*
+	public static <$classNameWithoutPackage$> createInstance( EOEditingContext ec ) {
+		return (<$classNameWithoutPackage$>)EOUtilities.createAndInsertInstance( ec, ENTITY_NAME );
+	}
+
+    // If you add instance variables to store property values you
+    // should add empty implementions of the Serialization methods
+    // to avoid unnecessary overhead (the properties will be
+    // serialized for you in the superclass).
+    private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
+    }
+
+    private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, java.lang.ClassNotFoundException {
+    }
+*/
+
+}

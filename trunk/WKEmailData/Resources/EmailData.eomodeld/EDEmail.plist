@@ -1,0 +1,135 @@
+
+{
+    attributes = 
+    (
+       
+       {
+           allowsNull = Y;
+           columnName = created;
+           name = created;
+           prototypeName = dateTime;
+       }, 
+       
+       {
+           allowsNull = N;
+           columnName = fromEmailAddress;
+           name = fromEmailAddress;
+           prototypeName = str100;
+       }, 
+       
+       {
+           columnName = fromPersonalName;
+           name = fromPersonalName;
+           prototypeName = str100;
+       }, 
+       
+       {
+           allowsNull = N;
+           name = oid;
+           prototypeName = oid;
+       }, 
+       
+       {
+           allowsNull = Y;
+           columnName = oidHtmlContentBody;
+           name = oidHtmlContentBody;
+           prototypeName = oid;
+       }, 
+       
+       {
+           allowsNull = Y;
+           columnName = oidPlainTextBody;
+           name = oidPlainTextBody;
+           prototypeName = oid;
+       }, 
+       
+       {
+           columnName = state;
+           name = state;
+           prototypeName = oid;
+       }, 
+       
+       {
+           allowsNull = N;
+           columnName = subject;
+           name = subject;
+           prototypeName = str255;
+       }, 
+       
+       {
+           allowsNull = N;
+           columnName = toEmailAddress;
+           name = toEmailAddress;
+           prototypeName = str100;
+       }, 
+       
+       {
+           columnName = toPersonalName;
+           name = toPersonalName;
+           prototypeName = str100;
+       }
+    );
+    attributesUsedForLocking = 
+    (
+       oid, 
+       state
+    );
+    className = wk.emaildata.EDEmail;
+    classProperties = 
+    (
+       created, 
+       fromEmailAddress, 
+       fromPersonalName, 
+       htmlContentBody, 
+       oidHtmlContentBody, 
+       oidPlainTextBody, 
+       plainTextBody, 
+       state, 
+       subject, 
+       toEmailAddress, 
+       toPersonalName
+    );
+    externalName = Email;
+    internalInfo = 
+    {};
+    name = EDEmail;
+    primaryKeyAttributes = 
+    (
+       oid
+    );
+    relationships = 
+    (
+       
+       {
+           destination = EDTextBlob;
+           isMandatory = N;
+           isToMany = N;
+           joinSemantic = EOInnerJoin;
+           joins = 
+           (
+              
+              {
+                  destinationAttribute = oid;
+                  sourceAttribute = oidHtmlContentBody;
+              }
+           );
+           name = htmlContentBody;
+       }, 
+       
+       {
+           destination = EDTextBlob;
+           isMandatory = N;
+           isToMany = N;
+           joinSemantic = EOInnerJoin;
+           joins = 
+           (
+              
+              {
+                  destinationAttribute = oid;
+                  sourceAttribute = oidPlainTextBody;
+              }
+           );
+           name = plainTextBody;
+       }
+    );
+}

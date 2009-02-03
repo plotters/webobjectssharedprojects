@@ -1,0 +1,58 @@
+
+{
+    attributes = 
+    (
+       
+       {
+           allowsNull = Y;
+           columnName = lastUsed;
+           name = lastUsed;
+           prototypeName = dateTime;
+       }, 
+       
+       {
+           columnName = lockingProperty;
+           name = lockingProperty;
+           prototypeName = numInt9Dgt2Billion;
+       }, 
+       
+       {
+           allowsNull = N;
+           name = oid;
+           prototypeName = oid;
+       }, 
+       
+       {
+           columnName = textBlob;
+           name = text;
+           prototypeName = text65000;
+       }, 
+       
+       {
+           columnName = type;
+           name = type;
+           prototypeName = numInt9Dgt2Billion;
+       }
+    );
+    attributesUsedForLocking = 
+    (
+       lockingProperty, 
+       oid
+    );
+    className = wk.emaildata.EDTextBlob;
+    classProperties = 
+    (
+       lastUsed, 
+       lockingProperty, 
+       text, 
+       type
+    );
+    externalName = TextBlob;
+    internalInfo = 
+    {};
+    name = EDTextBlob;
+    primaryKeyAttributes = 
+    (
+       oid
+    );
+}
